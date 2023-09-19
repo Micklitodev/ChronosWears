@@ -1,9 +1,6 @@
 import Link from 'next/link';
 
-import FooterMenu from 'components/layout/footer-menu';
 import LogoSquare from 'components/logo-square';
-import { getMenu } from 'lib/saleor';
-import { Suspense } from 'react';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
 
@@ -11,7 +8,6 @@ export default async function Footer() {
   const currentYear = new Date().getFullYear();
   const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
   const skeleton = 'w-full h-6 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700';
-  const menu = await getMenu('next-js-frontend-footer-menu');
   const copyrightName = COMPANY_NAME || SITE_NAME || '';
 
   return (
@@ -23,29 +19,14 @@ export default async function Footer() {
             <span className="uppercase">{SITE_NAME}</span>
           </Link>
         </div>
-        <Suspense
-          fallback={
-            <div className="flex h-[188px] w-[200px] flex-col gap-2">
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-            </div>
-          }
-        >
-          <FooterMenu menu={menu} />
-        </Suspense>
         <div className="md:ml-auto">
           <a
             className="flex h-8 flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"
-            aria-label="Deploy on Vercel"
-            href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsaleor%2Fnextjs-commerce&env=COMPANY_NAME,TWITTER_CREATOR,TWITTER_SITE,SITE_NAME,SALEOR_INSTANCE_URL&project-name=saleor-nextjs-commerce&repository-name=saleor-nextjs-commerce&demo-title=Saleor%20Next.js%20Commerce&demo-description=Saleor%20%2B%20Next.js%2013%20%2B%20App%20Router-ready%20e-commerce%20template&demo-url=https%3A%2F%2Fsaleor-commerce.vercel.app%2F&demo-image=https%3A%2F%2Fsaleor-commerce.vercel.app%2Fscreenshot.png"
+            href="https://www.mickdev.me/"
           >
             <span className="px-3">▲</span>
             <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
-            <span className="px-3">Deploy</span>
+            <span className="px-3">dev</span>
           </a>
         </div>
       </div>
@@ -54,14 +35,6 @@ export default async function Footer() {
           <p>
             &copy; {copyrightDate} {copyrightName}
             {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
-          </p>
-          <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
-          <p>Designed in California</p>
-          <p className="md:ml-auto">
-            Crafted by{' '}
-            <a href="https://vercel.com" className="text-black dark:text-white">
-              ▲ Vercel
-            </a>
           </p>
         </div>
       </div>
